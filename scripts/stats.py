@@ -24,7 +24,7 @@ FIG = ROOT / "results" / "figures"
 TAB.mkdir(parents=True, exist_ok=True)
 FIG.mkdir(parents=True, exist_ok=True)
 
-MODEL_LABEL = {"gemini": "Gemini", "gpt-4o-mini": "GPT-4o Mini", "deepseek": "DeepSeek"}
+MODEL_LABEL = {"gemini": "Gemini 2.5 Flash", "gpt-4o-mini": "GPT-4.1 Mini", "deepseek": "DeepSeek R1-0528"}
 STRAT_LABEL = {"zero_shot": "Zero-shot", "one_shot": "One-shot", "few_shot": "Few-shot"}
 STRAT_ORDER = ["zero_shot", "one_shot", "few_shot"]
 
@@ -68,12 +68,14 @@ def main():
     pivot["cond"] = pivot["model"] + "_" + pivot["strategy"]
     wide = pivot.pivot(index="case_id", columns="cond", values="meteor")
 
+    cond_label = {f"{m}_{s}": f"{MODEL_LABEL[m]} - {STRAT_LABEL[s]}" for m in MODEL_LABEL for s in STRAT_ORDER}
+
     lines.append("== Shapiro-Wilk (normalidade por condicao) ==")
     normal = True
     for c in wide.columns:
         stat, p = sps.shapiro(wide[c])
         normal &= p > 0.05
-        lines.append(f"  {c}: W={stat:.3f}, p={p:.4f}")
+        lines.append(f"  {cond_label.get(c, c)}: W={stat:.3f}, p={p:.4f}")
 
     lines.append("")
     if normal:
@@ -104,9 +106,9 @@ def main():
             try:
                 stat, p = sps.wilcoxon(a, b)
                 p_adj = min(p * len(pairs), 1.0)
-                lines.append(f"  {m}: {s1} vs {s2}: p={p:.4f}, p_adj={p_adj:.4f}")
+                lines.append(f"  {MODEL_LABEL.get(m, m)}: {STRAT_LABEL[s1]} vs {STRAT_LABEL[s2]}: p={p:.4f}, p_adj={p_adj:.4f}")
             except ValueError as e:
-                lines.append(f"  {m}: {s1} vs {s2}: {e}")
+                lines.append(f"  {MODEL_LABEL.get(m, m)}: {STRAT_LABEL[s1]} vs {STRAT_LABEL[s2]}: {e}")
 
     (TAB / "resultado_testes.txt").write_text("\n".join(lines), encoding="utf-8")
 

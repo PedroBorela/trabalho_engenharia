@@ -36,20 +36,25 @@ N_REPS = int(os.getenv("N_REPS", "5"))
 SLEEP = float(os.getenv("SLEEP_SECONDS", "2"))
 
 MODELS = {
-    "gemini": os.getenv("GEMINI_MODEL", "gemini-1.5-pro"),
-    "gpt-4o-mini": os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
-    "deepseek": os.getenv("DEEPSEEK_MODEL", "deepseek/deepseek-r1:free"),
+    "gemini": os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+    "gpt-4o-mini": os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+    "deepseek": os.getenv("DEEPSEEK_MODEL", "deepseek/deepseek-r1-0528"),
 }
 
 
 def call_gemini(prompt: str) -> str:
-    import google.generativeai as genai
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel(MODELS["gemini"])
-    resp = model.generate_content(
-        prompt, generation_config={"temperature": 0.0}
+    """Gemini via OpenRouter (evita a cota diária de 20 req/dia do tier gratuito do Google)."""
+    from openai import OpenAI
+    client = OpenAI(
+        api_key=os.environ["OPENROUTER_API_KEY"],
+        base_url="https://openrouter.ai/api/v1",
     )
-    return resp.text.strip()
+    resp = client.chat.completions.create(
+        model=f"google/{MODELS['gemini']}",
+        temperature=0.0,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return resp.choices[0].message.content.strip()
 
 
 def call_openai(prompt: str) -> str:

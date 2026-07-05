@@ -1,0 +1,24 @@
+== Shapiro-Wilk (normalidade por condicao) ==
+  DeepSeek R1-0528 - Few-shot: W=0.944, p=0.2823
+  DeepSeek R1-0528 - One-shot: W=0.985, p=0.9816
+  DeepSeek R1-0528 - Zero-shot: W=0.898, p=0.0382
+  Gemini 2.5 Flash - Few-shot: W=0.963, p=0.6071
+  Gemini 2.5 Flash - One-shot: W=0.942, p=0.2638
+  Gemini 2.5 Flash - Zero-shot: W=0.905, p=0.0503
+  GPT-4.1 Mini - Few-shot: W=0.968, p=0.7175
+  GPT-4.1 Mini - One-shot: W=0.979, p=0.9210
+  GPT-4.1 Mini - Zero-shot: W=0.986, p=0.9882
+
+== Teste de Friedman (nao parametrico) ==
+  chi2=67.587, p=0.0000
+
+== Post-hoc: Wilcoxon pareado (Bonferroni) entre estrategias, por modelo ==
+  DeepSeek R1-0528: Zero-shot vs One-shot: p=0.0005, p_adj=0.0014
+  DeepSeek R1-0528: Zero-shot vs Few-shot: p=0.0001, p_adj=0.0003
+  DeepSeek R1-0528: One-shot vs Few-shot: p=0.0240, p_adj=0.0719
+  Gemini 2.5 Flash: Zero-shot vs One-shot: p=0.0001, p_adj=0.0003
+  Gemini 2.5 Flash: Zero-shot vs Few-shot: p=0.0000, p_adj=0.0000
+  Gemini 2.5 Flash: One-shot vs Few-shot: p=0.2774, p_adj=0.8321
+  GPT-4.1 Mini: Zero-shot vs One-shot: p=0.0027, p_adj=0.0081
+  GPT-4.1 Mini: Zero-shot vs Few-shot: p=0.0017, p_adj=0.0051
+  GPT-4.1 Mini: One-shot vs Few-shot: p=0.3488, p_adj=1.0000
