@@ -1,0 +1,165 @@
+{
+  "descricao": "Corpus de 20 descrições de casos de teste em linguagem natural livre, extraídas de 10 repositórios públicos de QA no GitHub. Cada descrição é a entrada fornecida às LLMs para geração do cenário Gherkin. Coleta realizada em 04/07/2026.",
+  "casos": [
+    {
+      "id": "CT01",
+      "projeto": "honoratotech/projeto-qa-parabank",
+      "url": "https://github.com/honoratotech/projeto-qa-parabank",
+      "sistema": "ParaBank (banco simulado)",
+      "fonte": "README.md - CT-001",
+      "descricao": "Verificar se o sistema bloqueia acessos após múltiplas tentativas de login com senhas incorretas consecutivas. Inserir um usuário válido e preencher senhas incorretas por 5 vezes consecutivas. O sistema deveria bloquear temporariamente a conta ou exigir uma validação extra, como CAPTCHA."
+    },
+    {
+      "id": "CT02",
+      "projeto": "honoratotech/projeto-qa-parabank",
+      "url": "https://github.com/honoratotech/projeto-qa-parabank",
+      "sistema": "ParaBank (banco simulado)",
+      "fonte": "README.md - CT-004",
+      "descricao": "Analisar o comportamento da aplicação quando o usuário clica repetidamente no botão de submissão na criação de conta devido à lentidão ou ansiedade. Na aba de criação de conta, clicar de forma rápida e consecutiva (3 a 4 vezes) no botão de confirmação. O sistema não deve criar contas duplicadas e deve travar o botão de submissão para evitar requisições repetidas."
+    },
+    {
+      "id": "CT03",
+      "projeto": "eduardolentz/qa-bugbank-casos-de-teste",
+      "url": "https://github.com/eduardolentz/qa-bugbank-casos-de-teste",
+      "sistema": "BugBank (banco digital de treino)",
+      "fonte": "README.md - CT-07 / REQ-C8",
+      "descricao": "Testar o cadastro de usuário informando senhas diferentes nos campos Senha e Confirmação de Senha. O sistema deve impedir o cadastro, pois senha e confirmação precisam ser iguais, e deve exibir mensagem de erro ao usuário."
+    },
+    {
+      "id": "CT04",
+      "projeto": "eduardolentz/qa-bugbank-casos-de-teste",
+      "url": "https://github.com/eduardolentz/qa-bugbank-casos-de-teste",
+      "sistema": "BugBank (banco digital de treino)",
+      "fonte": "README.md - CT-09",
+      "descricao": "Testar o cadastro de uma nova conta usando um e-mail que já está cadastrado no sistema. O comportamento esperado é exibir a mensagem de erro de e-mail já cadastrado e não criar a conta, preservando a conta anterior sem sobrescrevê-la."
+    },
+    {
+      "id": "CT05",
+      "projeto": "GhansenGoncalves/manual-tests",
+      "url": "https://github.com/GhansenGoncalves/manual-tests",
+      "sistema": "SauceDemo (e-commerce de treino)",
+      "fonte": "test-cases/casos-de-teste-login-checkout.md - TC-04",
+      "descricao": "Tentar fazer login deixando os campos de usuário e senha vazios e clicando no botão Login. O sistema deve exibir a mensagem de que o nome de usuário é obrigatório e não permitir o acesso."
+    },
+    {
+      "id": "CT06",
+      "projeto": "GhansenGoncalves/manual-tests",
+      "url": "https://github.com/GhansenGoncalves/manual-tests",
+      "sistema": "SauceDemo (e-commerce de treino)",
+      "fonte": "test-cases/casos-de-teste-login-checkout.md - TC-08",
+      "descricao": "Realizar o checkout completo com um item no carrinho: ir ao carrinho, iniciar o checkout, preencher nome, sobrenome e CEP, continuar e finalizar a compra. A página final deve exibir a mensagem de agradecimento confirmando o pedido."
+    },
+    {
+      "id": "CT07",
+      "projeto": "THPL28/DESAFIO-QA-BEEDOO-2026",
+      "url": "https://github.com/THPL28/DESAFIO-QA-BEEDOO-2026",
+      "sistema": "Sistema de Gerenciamento de Cursos",
+      "fonte": "README.md - T01-CAD",
+      "descricao": "Testar o cadastro de curso com os campos obrigatórios vazios. O sistema deve validar os campos obrigatórios, impedir a submissão do formulário e exibir mensagens de erro claras, não permitindo a criação de registros incompletos."
+    },
+    {
+      "id": "CT08",
+      "projeto": "THPL28/DESAFIO-QA-BEEDOO-2026",
+      "url": "https://github.com/THPL28/DESAFIO-QA-BEEDOO-2026",
+      "sistema": "Sistema de Gerenciamento de Cursos",
+      "fonte": "README.md - T03-LIST",
+      "descricao": "Testar a exclusão de um curso cadastrado. Após confirmar a exclusão, o sistema deve remover o curso da listagem e exibir mensagem de sucesso coerente com a operação realizada, garantindo que o registro não apareça mais na lista."
+    },
+    {
+      "id": "CT09",
+      "projeto": "lucasfreitas611/qa-studio-tests-pad-o",
+      "url": "https://github.com/lucasfreitas611/qa-studio-tests-pad-o",
+      "sistema": "Sistema de Operação de Estúdio",
+      "fonte": "features/BUGS.md - CT-002",
+      "descricao": "Na página Padrão, preencher corretamente os campos Grade Professor, Chave Principal e Link Drive, deixar o campo Link do YouTube vazio e tentar gerar a mensagem. O sistema deve exibir o aviso de que o link do YouTube é obrigatório e bloquear a geração da mensagem."
+    },
+    {
+      "id": "CT10",
+      "projeto": "lucasfreitas611/qa-studio-tests-pad-o",
+      "url": "https://github.com/lucasfreitas611/qa-studio-tests-pad-o",
+      "sistema": "Sistema de Operação de Estúdio",
+      "fonte": "features/BUGS.md - CT-005",
+      "descricao": "Selecionar a opção Chave Principal, deixar o campo de texto da chave vazio, preencher os demais dados e tentar gerar a mensagem. O sistema deve exibir a mensagem de que a chave principal é obrigatória e não permitir a geração."
+    },
+    {
+      "id": "CT11",
+      "projeto": "JuniorSantosDev86/firmus-manual-qa-portfolio-PT.BR",
+      "url": "https://github.com/JuniorSantosDev86/firmus-manual-qa-portfolio-PT.BR",
+      "sistema": "Firmus (gestão para prestadores de serviço)",
+      "fonte": "bug-reports/BUG-001",
+      "descricao": "Testar o cadastro de um novo cliente preenchendo apenas o campo nome e deixando os demais campos vazios. O sistema deve impedir a criação de cliente com dados incompletos quando houver campos mínimos obrigatórios e deve exibir mensagens claras de validação."
+    },
+    {
+      "id": "CT12",
+      "projeto": "JuniorSantosDev86/firmus-manual-qa-portfolio-PT.BR",
+      "url": "https://github.com/JuniorSantosDev86/firmus-manual-qa-portfolio-PT.BR",
+      "sistema": "Firmus (gestão para prestadores de serviço)",
+      "fonte": "bug-reports/BUG-005",
+      "descricao": "Na criação de um orçamento, preencher o campo de valor monetário com texto em vez de número e confirmar a criação. O sistema deve rejeitar texto no campo de valor, exigir um valor numérico válido e não criar o orçamento com valor inválido."
+    },
+    {
+      "id": "CT13",
+      "projeto": "lalesca-qa/qa-ecommerce-testing",
+      "url": "https://github.com/lalesca-qa/qa-ecommerce-testing",
+      "sistema": "SauceDemo (e-commerce de treino)",
+      "fonte": "casos-de-teste/casos-de-teste.md - CT03",
+      "descricao": "Estando logado na loja, clicar no botão de adicionar ao carrinho de um produto do catálogo. O produto deve ser adicionado ao carrinho e o carrinho deve refletir o item adicionado."
+    },
+    {
+      "id": "CT14",
+      "projeto": "lalesca-qa/qa-ecommerce-testing",
+      "url": "https://github.com/lalesca-qa/qa-ecommerce-testing",
+      "sistema": "SauceDemo (e-commerce de treino)",
+      "fonte": "casos-de-teste/casos-de-teste.md - CT04",
+      "descricao": "Com um produto já adicionado ao carrinho, remover o item do carrinho. Após a remoção, o carrinho deve ficar vazio e o produto não deve mais aparecer na lista."
+    },
+    {
+      "id": "CT15",
+      "projeto": "ofroog/qa-portfolio",
+      "url": "https://github.com/ofroog/qa-portfolio",
+      "sistema": "SaaS de corte de vídeos do YouTube",
+      "fonte": "casos-de-teste-projeto-video.md - CT-002",
+      "descricao": "Inserir no campo de URL um endereço que não é do YouTube, como o endereço de um site de buscas, e confirmar. O sistema deve exibir mensagem de erro clara, informando que a URL é inválida ou que é necessário inserir um link do YouTube, e não iniciar o processamento."
+    },
+    {
+      "id": "CT16",
+      "projeto": "ofroog/qa-portfolio",
+      "url": "https://github.com/ofroog/qa-portfolio",
+      "sistema": "SaaS de corte de vídeos do YouTube",
+      "fonte": "casos-de-teste-projeto-video.md - CT-005",
+      "descricao": "Com um vídeo processado com sucesso, clicar em Download e aguardar o arquivo. O arquivo de vídeo deve ser baixado com sucesso, ser reproduzível e estar no formato esperado (mp4)."
+    },
+    {
+      "id": "CT17",
+      "projeto": "felipetster/portfolio-testes-manuais-saucedemo",
+      "url": "https://github.com/felipetster/portfolio-testes-manuais-saucedemo",
+      "sistema": "SauceDemo (e-commerce de treino)",
+      "fonte": "README.md - TC-Login-003",
+      "descricao": "Verificar a mensagem de erro ao tentar login com usuário bloqueado. Na página de login, inserir o usuário bloqueado com a senha correta e clicar em Login. A mensagem de erro informando que o usuário foi bloqueado deve ser exibida."
+    },
+    {
+      "id": "CT18",
+      "projeto": "felipetster/portfolio-testes-manuais-saucedemo",
+      "url": "https://github.com/felipetster/portfolio-testes-manuais-saucedemo",
+      "sistema": "SauceDemo (e-commerce de treino)",
+      "fonte": "README.md - BUG-Inventario-01",
+      "descricao": "Logar no sistema com o usuário com perfil problemático e observar as imagens dos produtos na página de inventário. Cada produto deve exibir a imagem correta correspondente ao próprio produto, e não uma imagem incorreta repetida."
+    },
+    {
+      "id": "CT19",
+      "projeto": "andresadickson/qa-portfolio",
+      "url": "https://github.com/andresadickson/qa-portfolio",
+      "sistema": "Mercado Livre (site real)",
+      "fonte": "test-case-login.md - CT-001",
+      "descricao": "Login com dados válidos: com usuário já cadastrado, acessar o site, clicar em Login, inserir e-mail válido, inserir senha válida e clicar em Entrar. O usuário deve ser autenticado e redirecionado para a área logada."
+    },
+    {
+      "id": "CT20",
+      "projeto": "andresadickson/qa-portfolio",
+      "url": "https://github.com/andresadickson/qa-portfolio",
+      "sistema": "Mercado Livre (site real)",
+      "fonte": "test-case-login-invalido.md - CT-002",
+      "descricao": "Login com dados inválidos: acessar o site, clicar em Login, inserir e-mail inválido ou incorreto, inserir senha incorreta e clicar em Entrar. O sistema deve exibir uma mensagem de erro informando que os dados são inválidos e não autenticar o usuário."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+Converta a descrição de caso de teste a seguir em exatamente UM cenário BDD usando sintaxe Gherkin estrita. A saída deve conter apenas a sintaxe Gherkin do cenário, sem comentários, explicações ou a palavra "Feature". Use português para o conteúdo do cenário, mas mantenha as palavras-chave Gherkin em inglês (Scenario, Given, When, Then, And).
+
+Descrição do caso de teste:
+{test_case_description}
+
+Certifique-se de declarar claramente o valor de negócio ou o resultado esperado e de focar em uma única ação e um único resultado. Use apenas os passos essenciais (Given, When, Then, And) de forma clara e declarativa, evitando detalhes de implementação e repetições desnecessárias. Os cenários devem ser independentes, usar terminologia de negócio consistente sem jargão técnico e ser escritos em terceira pessoa para evitar ambiguidade.
+
+O cenário deve ser indentado com dois espaços abaixo de "Scenario", sem linhas em branco entre os passos.
+
+Siga esta estrutura para a saída:
+
+Scenario: [Breve descrição do cenário]
+  Given [contexto inicial]
+  And [contexto adicional, se houver]
+  When [uma ação é realizada]
+  Then [um resultado específico deve ocorrer]
+  And [outro resultado, se houver]
+
+Retorne apenas o cenário BDD, sem formatação ou texto adicional (por exemplo, sem 'gherkin```'), e ele deve ser um único cenário Gherkin válido.

@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\sloppy
+
+% Marcador de conteúdo a preencher após a execução do experimento
+\newcommand{\preencher}[1]{\textcolor{red}{[PREENCHER: #1]}}
+
+\title{Avaliação de Estratégias de Prompting em LLMs para a Geração Automatizada de Cenários Gherkin: Um Estudo Comparativo}
+
+\author{Pedro Borela Andrade\inst{1}}
+
+\address{Instituto Federal do Sudeste de Minas Gerais (IFSEMG)\\
+  Manhuaçu -- MG -- Brasil
+  \email{pborela2012@hotmail.com}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Behavior-Driven Development (BDD) relies on structured Gherkin scenarios to align business requirements with automated testing. This paper presents an empirical study, designed as a conceptual replication of Fernandes et al. (2025), evaluating three Large Language Models (LLMs) --- Gemini, GPT-4o Mini, and DeepSeek --- in the automated generation of Gherkin specifications from natural language test descriptions, under three prompting strategies (zero-shot, one-shot, and few-shot). The sample comprises 20 test case descriptions extracted from 10 open-source QA repositories on GitHub. All API calls were made with fixed parameters ($temperature=0$) and five repetitions per combination, and outputs were evaluated with the METEOR metric against a human-curated ground truth. \preencher{one sentence summarizing the main quantitative findings after running the experiment}. All artifacts are publicly available to ensure full reproducibility.
+\end{abstract}
+
+\begin{resumo}
+  O Desenvolvimento Orientado a Comportamento (BDD) baseia-se em cenários Gherkin estruturados para alinhar requisitos de negócio ao teste automatizado. Este artigo apresenta um estudo empírico, concebido como replicação conceitual de Fernandes et al. (2025), que avalia três Modelos de Linguagem de Grande Porte (LLMs) --- Gemini, GPT-4o Mini e DeepSeek --- na geração automática de especificações Gherkin a partir de descrições de casos de teste em linguagem natural, sob três estratégias de prompting (zero-shot, one-shot e few-shot). A amostra é composta por 20 descrições de casos de teste extraídas de 10 repositórios públicos de QA no GitHub. Todas as chamadas de API usaram parâmetros fixos ($temperature=0$) e cinco repetições por combinação, e as saídas foram avaliadas com a métrica METEOR contra um gabarito de referência revisado por humano. \preencher{uma frase com os principais achados quantitativos após a execução do experimento}. Todos os artefatos estão publicamente disponíveis para garantir reprodutibilidade total.
+\end{resumo}
+
+\section{Introdução}
+
+O Desenvolvimento Orientado a Comportamento (BDD) estabeleceu-se como uma abordagem ágil para mitigar falhas de comunicação entre stakeholders de negócio, desenvolvedores e engenheiros de qualidade \cite{solis2011,farooq2023}. Por meio da linguagem Gherkin, baseada na sintaxe estruturada \textit{Given-When-Then}, requisitos de software transformam-se em documentação viva e em especificações executáveis de teste. Contudo, a escrita manual desses cenários consome tempo significativo de engenharia e introduz ambiguidades semânticas que podem resultar em testes instáveis (\textit{flaky tests}) \cite{farooq2023}.
+
+A emergência dos Modelos de Linguagem de Grande Porte (LLMs) abriu caminho para a automação dessa tradução de descrições informais em artefatos estruturados \cite{karpurapu2024}. No entanto, a adoção industrial dessas ferramentas ainda carece de avaliações empíricas que comparem a acurácia e a estabilidade das saídas de diferentes modelos, especialmente considerando os riscos de irreprodutibilidade apontados na literatura \cite{sallou2024}.
+
+Este trabalho é uma \textbf{replicação conceitual} do estudo de \cite{fernandes2025}, que comparou sete LLMs na geração de cenários Gherkin a partir de descrições de teste de um único sistema industrial. Nossa replicação adapta o desenho original em três pontos: (i) avalia três LLMs de ampla adoção (Gemini, GPT-4o Mini e DeepSeek); (ii) amplia a diversidade da amostra, usando 20 descrições de casos de teste extraídas de 10 repositórios públicos distintos de QA --- endereçando diretamente uma ameaça à validade externa reconhecida pelos próprios autores do estudo original; e (iii) fixa $temperature=0$ em todas as chamadas, permitindo analisar a estabilidade dos modelos sob configuração determinística, requisito central de reprodutibilidade deste projeto.
+
+\section{Objetivo Geral e Específicos}
+
+O objetivo geral deste projeto é realizar um estudo empírico comparativo, replicando a metodologia de \cite{fernandes2025}, para avaliar a eficácia e a estabilidade de três LLMs na geração automatizada de cenários de teste em linguagem Gherkin a partir de descrições informais em linguagem natural, sob três estratégias de prompting.
+
+Definem-se os seguintes objetivos específicos:
+\begin{itemize}
+    \item Avaliar a acurácia léxico-semântica das especificações geradas em comparação com um gabarito de referência (\textit{ground truth}) revisado por humano, por meio da métrica METEOR;
+    \item Comparar o efeito das estratégias de prompting zero-shot, one-shot e few-shot sobre a qualidade dos cenários gerados por cada modelo;
+    \item Mensurar a estabilidade de execução (\textit{run-to-run stability}) dos modelos sob parâmetros determinísticos de geração ($temperature=0$);
+    \item Identificar e classificar os padrões de erro mais frequentes cometidos pelas LLMs na formulação dos cenários;
+    \item Disponibilizar um repositório público com todos os artefatos (dataset, prompts, códigos, saídas brutas e análises) para garantir auditabilidade e reprodutibilidade completa do estudo.
+\end{itemize}
+
+\section{Materiais e Métodos}
+
+O desenho metodológico segue o pipeline experimental de \cite{fernandes2025} --- preparação do dataset, engenharia de prompts, geração multi-modelo, avaliação por métrica e análise estatística --- dispensando participantes humanos e concentrando-se na análise automatizada de artefatos de software. Todos os artefatos estão disponíveis no repositório público do estudo\footnote{\preencher{URL do repositório GitHub após o push}}.
+
+\subsection{Amostra de Artefatos e Dataset}
+
+O \textit{corpus} avaliativo é composto por 20 descrições textuais livres de casos de teste, escritas em português por profissionais e estudantes de QA, extraídas manualmente de 10 repositórios públicos distintos hospedados no GitHub. Os sistemas cobertos incluem aplicações bancárias simuladas (ParaBank, BugBank), e-commerce (SauceDemo), gestão de cursos, gestão de serviços (Firmus), operação de estúdio, corte de vídeos e um marketplace real (Mercado Livre), assegurando heterogeneidade de domínios. Cada descrição está registrada em \texttt{dataset/casos\_de\_teste.json} com o repositório de origem, a URL e o identificador original do caso.
+
+Para cada descrição, foi construído manualmente um cenário Gherkin de referência (\textit{ground truth}), seguindo o checklist de qualidade de cenários BDD de \cite{oliveira2019}: declaração clara do valor de negócio, foco em uma ação e um resultado, linguagem declarativa, terminologia de negócio consistente e escrita em terceira pessoa. O rascunho inicial do gabarito contou com apoio de ferramenta de IA generativa e foi integralmente revisado e ajustado pelo autor (ver Declaração de Uso de IA).
+
+\subsection{Modelos de Linguagem e Configuração do Experimento}
+
+Foram comparadas três arquiteturas de LLMs de ampla adoção: \textbf{Gemini} (Google), \textbf{GPT-4o Mini} (OpenAI) e \textbf{DeepSeek}, acessadas por suas APIs públicas. As versões exatas utilizadas estão registradas nos metadados de cada geração no repositório.
+
+Cada modelo foi avaliado sob três estratégias de prompting, com prompts adaptados de \cite{fernandes2025}: \textit{zero-shot} (apenas instruções e restrições de sintaxe Gherkin), \textit{one-shot} (um exemplo ilustrativo) e \textit{few-shot} (três exemplos diversos). Os exemplos usados nos prompts não pertencem ao corpus avaliado. Para satisfazer o critério de reprodutibilidade do projeto, o parâmetro de temperatura foi fixado em zero ($temperature=0$) em todas as chamadas. Cada combinação (modelo $\times$ estratégia $\times$ caso) foi executada 5 vezes de forma independente, totalizando $3 \times 3 \times 20 \times 5 = 900$ gerações, todas armazenadas com metadados (modelo, versão, estratégia, caso, repetição, \textit{timestamp} e resposta) em formato JSONL.
+
+\subsection{Métrica de Avaliação}
+
+O alinhamento entre cenários gerados e gabaritos foi mensurado com a métrica \textbf{METEOR} \cite{lavie2009}, adotada como métrica principal no estudo original por apresentar a maior correlação com o julgamento de especialistas \cite{fernandes2025}. Diferentemente de métricas de contagem exata de palavras, o METEOR incorpora radicalização, correspondência de sinônimos e penalidades por desordenação de cláusulas, o que é adequado para textos estruturados como cenários Gherkin.
+
+\subsection{Procedimento de Análise}
+
+A análise compreende duas etapas, ambas determinísticas a partir das saídas brutas versionadas. Primeiro, a variabilidade de cada modelo entre as 5 repetições é descrita por média, desvio-padrão (DP) e coeficiente de variação (CV). Segundo, a comparação de acurácia entre modelos e estratégias usa os escores METEOR médios por caso: a normalidade é verificada pelo teste de Shapiro-Wilk; conforme o resultado, aplica-se ANOVA de medidas repetidas ou o teste de Friedman, com comparações post-hoc pareadas (Wilcoxon) e correção de Bonferroni, espelhando o procedimento de \cite{fernandes2025}.
+
+\subsection{Reprodutibilidade}
+
+A geração por LLMs é estocástica por natureza; por isso, todas as 900 saídas brutas são versionadas no repositório. As etapas de avaliação (METEOR) e análise estatística são totalmente determinísticas: a partir do mesmo arquivo de gerações, qualquer pessoa obtém exatamente os mesmos escores, tabelas e testes apresentados neste relatório, atendendo ao critério de reprodutibilidade do projeto.
+
+\section{Resultados}
+
+% =====================================================================
+% INSTRUÇÕES: após rodar scripts/evaluate.py e scripts/stats.py,
+% copie o conteúdo de results/tables/tabela_acuracia.tex e
+% results/tables/tabela_variabilidade.tex para cá, e preencha os
+% números nos parágrafos abaixo com base em results/tables/resultado_testes.txt.
+% =====================================================================
+
+\subsection{Acurácia Léxico-Semântica}
+
+\preencher{inserir aqui a Tabela results/tables/tabela\_acuracia.tex}
+
+\preencher{parágrafo descrevendo qual modelo e estratégia obtiveram as maiores médias METEOR, com os valores reais; comparar com os achados do estudo original, em que o zero-shot foi superior na maioria dos modelos e o Gemini obteve a maior média (0,84)} \cite{fernandes2025}.
+
+\subsection{Estabilidade de Execução}
+
+\preencher{inserir aqui a Tabela results/tables/tabela\_variabilidade.tex}
+
+\preencher{parágrafo descrevendo o CV observado por modelo e estratégia sob temperature=0, destacando se as saídas foram idênticas entre repetições e quais modelos apresentaram maior variação residual}
+
+\subsection{Análise Estatística}
+
+\preencher{reportar Shapiro-Wilk, o teste global (ANOVA de medidas repetidas ou Friedman) com estatística e p-valor, e os post-hoc com correção de Bonferroni, a partir de results/tables/resultado\_testes.txt}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{boxplot_meteor.png}
+\caption{Distribuição dos escores METEOR por modelo e estratégia de prompting.}
+\label{fig:boxplot}
+\end{figure}
+
+\section{Discussão}
+
+\preencher{discutir os resultados à luz do estudo original: (i) a estratégia zero-shot manteve a vantagem observada por Fernandes et al.? (ii) o ranking de modelos se sustentou em um corpus heterogêneo de 10 projetos? (iii) o que o CV sob temperature=0 indica sobre o uso desses modelos em pipelines de CI/CD?}
+
+A análise qualitativa dos cenários com menores escores METEOR examinou os desvios recorrentes, classificados segundo as categorias do estudo original \cite{fernandes2025}: \textbf{inserção de ações irrelevantes} (passos ou pré-condições não implicados pela descrição, como etapas de autenticação não mencionadas), \textbf{falhas de lógica de negócio} (inversão ou omissão do resultado central do cenário) e \textbf{desvios lexicais} (frases sintaticamente corretas que alteram o sentido do passo). \preencher{indicar quais categorias foram observadas nos dados coletados, com exemplos e frequência aproximada}
+
+\section{Conclusão}
+
+Este estudo replicou, em escala reduzida e com corpus diversificado, a metodologia de \cite{fernandes2025} para avaliação de LLMs na geração de cenários Gherkin. \preencher{sintetizar os principais achados: melhor combinação modelo/estratégia, estabilidade observada e implicações práticas para adoção em esteiras de CI/CD}
+
+Como limitações, destacam-se o tamanho da amostra (20 descrições), a avaliação por uma única métrica automática e o recorte de três modelos, que restringem a generalização. Trabalhos futuros podem ampliar o corpus, incorporar avaliação humana sistemática dos cenários gerados e estender a análise a outros artefatos estruturados, como histórias de usuário e critérios de aceitação.
+
+\section*{Declaração de Uso de IA}
+
+Declaro que ferramentas de IA Generativa foram utilizadas neste trabalho nas seguintes etapas: \textbf{Claude (Anthropic)} foi utilizada para apoiar o desenho da replicação, a implementação dos scripts de coleta e análise, o rascunho inicial do gabarito de referência (integralmente revisado pelo autor) e a revisão gramatical e estrutural do texto, nas etapas de planejamento, execução e escrita do relatório técnico. Os modelos \textbf{Gemini}, \textbf{GPT-4o Mini} e \textbf{DeepSeek} foram utilizados exclusivamente como \emph{objetos de estudo}, na etapa de execução do experimento. O autor assume integral responsabilidade pelo conteúdo intelectual e técnico do trabalho, em conformidade com a Portaria CNPq nº 2.664/2026.
+
+\bibliographystyle{sbc}
+\bibliography{referencias}
+
+\end{document}

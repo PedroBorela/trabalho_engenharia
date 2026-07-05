@@ -1,0 +1,8 @@
+openai>=1.40.0
+google-generativeai>=0.7.0
+python-dotenv>=1.0.0
+nltk>=3.9
+pandas>=2.0
+scipy>=1.11
+statsmodels>=0.14
+matplotlib>=3.8

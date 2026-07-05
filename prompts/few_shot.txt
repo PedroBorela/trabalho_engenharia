@@ -1,0 +1,40 @@
+Considere os exemplos a seguir de conversão de descrições de casos de teste em cenários BDD com sintaxe Gherkin estrita.
+
+Exemplo 1 - descrição:
+Testar a redefinição de senha com um e-mail não cadastrado. Ao informar um e-mail que não existe no sistema e solicitar a recuperação, o sistema deve exibir uma mensagem informando que o e-mail não foi encontrado e não deve enviar nenhuma mensagem de recuperação.
+
+Exemplo 1 - saída:
+Scenario: Impedir recuperação de senha com e-mail não cadastrado
+  Given o usuário está na página de recuperação de senha
+  When o usuário solicita a recuperação com um e-mail não cadastrado
+  Then o sistema deve exibir uma mensagem informando que o e-mail não foi encontrado
+  And nenhuma mensagem de recuperação deve ser enviada
+
+Exemplo 2 - descrição:
+Verificar a aplicação de um cupom de desconto válido no carrinho. Com um produto no carrinho, ao informar um cupom válido, o sistema deve aplicar o desconto ao total da compra e exibir o novo valor.
+
+Exemplo 2 - saída:
+Scenario: Aplicar cupom de desconto válido no carrinho
+  Given o usuário possui um produto no carrinho de compras
+  When o usuário informa um cupom de desconto válido
+  Then o sistema deve aplicar o desconto ao total da compra
+  And o sistema deve exibir o valor atualizado
+
+Exemplo 3 - descrição:
+Testar o envio de um formulário de contato sem preencher o campo de mensagem. O sistema deve impedir o envio e exibir um aviso informando que o campo de mensagem é obrigatório.
+
+Exemplo 3 - saída:
+Scenario: Impedir envio de contato sem mensagem
+  Given o usuário está no formulário de contato
+  When o usuário tenta enviar o formulário sem preencher o campo de mensagem
+  Then o sistema deve impedir o envio
+  And o sistema deve exibir um aviso informando que o campo de mensagem é obrigatório
+
+Agora converta a descrição de caso de teste a seguir em exatamente UM cenário BDD usando sintaxe Gherkin estrita. A saída deve seguir o formato dos exemplos fornecidos e conter apenas o cenário BDD. Apenas as palavras-chave Gherkin devem aparecer em inglês; todo o restante do texto deve estar em português.
+
+Descrição do caso de teste:
+{test_case_description}
+
+Certifique-se de declarar claramente o valor de negócio ou o resultado esperado e de focar em uma única ação e um único resultado. Use apenas os passos essenciais (Given, When, Then, And) de forma clara e declarativa, evitando detalhes de implementação e repetições desnecessárias. Os cenários devem ser independentes, usar terminologia de negócio consistente sem jargão técnico e ser escritos em terceira pessoa.
+
+Retorne apenas o cenário BDD, sem formatação ou texto adicional, e ele deve ser um único cenário Gherkin válido.
