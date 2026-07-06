@@ -20,12 +20,11 @@ públicos de QA** no GitHub.
 │   ├── generate.py           # Etapa 1: chamadas às APIs (temperature=0, com checkpoint)
 │   ├── evaluate.py           # Etapa 2: cálculo do METEOR (determinística)
 │   └── stats.py              # Etapa 3: estatística, tabelas LaTeX e figura (determinística)
-├── results/
-│   ├── raw/generations.jsonl # todas as saídas das LLMs com metadados
-│   ├── metrics/              # meteor_scores.csv
-│   ├── tables/               # tabelas .tex prontas para o artigo
-│   └── figures/              # boxplot
-└── latex/                    # fontes LaTeX do relatório (template SBC)
+└── results/
+    ├── raw/generations.jsonl # todas as saídas das LLMs com metadados
+    ├── metrics/              # meteor_scores.csv
+    ├── tables/               # tabelas .tex prontas para o artigo
+    └── figures/              # boxplot
 ```
 
 ## Como reproduzir
