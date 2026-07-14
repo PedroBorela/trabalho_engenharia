@@ -1,0 +1,21 @@
+\begin{table}[ht]
+\centering
+\caption{Distribuição do coeficiente de variação (CV, \%) do METEOR por caso de teste, entre as 5 repetições: mediana, intervalo interquartil (IIQ) e valor máximo observado.}
+\label{tab:estabilidade_caso}
+\footnotesize
+\begin{tabular}{llcccc}
+\hline
+\textbf{Modelo} & \textbf{Estratégia} & \textbf{Mediana} & \textbf{IIQ (P25--P75)} & \textbf{Máximo} & \textbf{Caso do máx.} \\
+\hline
+DeepSeek R1-0528 & Zero-shot & 11.06 & 7.09--13.56 & 18.28 & CT08 \\
+DeepSeek R1-0528 & One-shot & 7.99 & 6.03--11.17 & 26.31 & CT12 \\
+DeepSeek R1-0528 & Few-shot & 6.31 & 4.19--8.59 & 16.88 & CT19 \\
+Gemini 2.5 Flash & Zero-shot & 0.05 & 0.00--3.28 & 23.10 & CT03 \\
+Gemini 2.5 Flash & One-shot & 0.00 & 0.00--0.00 & 0.18 & CT01 \\
+Gemini 2.5 Flash & Few-shot & 0.00 & 0.00--0.00 & 0.00 & CT20 \\
+GPT-4.1 Mini & Zero-shot & 3.04 & 1.46--7.24 & 18.04 & CT18 \\
+GPT-4.1 Mini & One-shot & 2.58 & 0.00--3.42 & 7.48 & CT02 \\
+GPT-4.1 Mini & Few-shot & 1.39 & 0.00--2.89 & 8.38 & CT18 \\
+\hline
+\end{tabular}
+\end{table}

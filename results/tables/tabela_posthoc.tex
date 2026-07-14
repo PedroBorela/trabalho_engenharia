@@ -1,0 +1,21 @@
+\begin{table}[ht]
+\centering
+\caption{Comparações post-hoc pareadas (Wilcoxon) entre estratégias, por modelo: diferença mediana de METEOR (segunda estratégia menos a primeira), valor-p bruto, valor-p ajustado (Bonferroni) e tamanho de efeito (correlação rank-biserial pareada $r$).}
+\label{tab:posthoc}
+\footnotesize
+\begin{tabular}{llcccc}
+\hline
+\textbf{Modelo} & \textbf{Comparação} & \textbf{$\Delta$ mediana} & \textbf{$p$} & \textbf{$p_{adj}$} & \textbf{$r$} \\
+\hline
+DeepSeek R1-0528 & Zero-shot vs. One-shot & +0,093 & $<$0,001 & 0,001 & +0,83 \\
+DeepSeek R1-0528 & Zero-shot vs. Few-shot & +0,116 & $<$0,001 & $<$0,001 & +0,90 \\
+DeepSeek R1-0528 & One-shot vs. Few-shot & +0,027 & 0,024 & 0,072 & +0,57 \\
+Gemini 2.5 Flash & Zero-shot vs. One-shot & +0,137 & $<$0,001 & $<$0,001 & +0,90 \\
+Gemini 2.5 Flash & Zero-shot vs. Few-shot & +0,140 & $<$0,001 & $<$0,001 & +1.00 \\
+Gemini 2.5 Flash & One-shot vs. Few-shot & +0,012 & 0,277 & 0,832 & +0,29 \\
+GPT-4.1 Mini & Zero-shot vs. One-shot & +0,075 & 0,003 & 0,008 & +0,73 \\
+GPT-4.1 Mini & Zero-shot vs. Few-shot & +0,095 & 0,002 & 0,005 & +0,76 \\
+GPT-4.1 Mini & One-shot vs. Few-shot & +0,004 & 0,349 & 1,000 & +0,25 \\
+\hline
+\end{tabular}
+\end{table}
